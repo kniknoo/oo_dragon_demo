@@ -31,6 +31,8 @@ module Animation
   def animate()
     index = 0.frame_index @sprites, @per, @loop
     @file = "#{@filename}#{index + @start}#{@ext}" 
+    #Testing frame_index : comment above 2 lines and uncomment below
+    #@file = "#{@filename}#{@start.frame_index @sprites, @per, @loop}#{@ext}"
   end
   
   def random_color(start, size) @color = 3.times.map {rand(size) + start} end
