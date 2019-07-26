@@ -1,16 +1,14 @@
 $gtk.require "lib/sprite.rb"
 
 class Dragon < Sprite
-
-  gtk_args
   
   include Animation
   include Sensation
   
   def initialize(x, y)
-    super(x, y, 128, 101, "sprites/dragon_fly_" )
+    super(x, y, 128, 101, "sprites/dragon/dragon_fly_" )
     @color = random_color(55, 200)
-    load_frames
+    load_frames(0, 6, 8, true)
   end
   
   def flap() animate end

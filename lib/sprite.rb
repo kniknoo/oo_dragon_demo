@@ -1,18 +1,20 @@
 class Sprite
   
-  attr_accessor :x, :y, :color
+  gtk_args
+  attr_accessor :x, :y, :color, :viewport, :origin, :height, :width, :scale, :start
   
-  def initialize(x, y, width, height, filename,  ext = ".png" )
-    @x, @y, @width, @height = x, y, width, height
+  def initialize(x, y, width, height, filename, scale = 1, ext = ".png" )
+    @scale = scale
+    @x, @y, @width, @height = x, y, width * @scale, height * @scale
     @filename, @ext = filename, ext
     @file = "#{@filename}#{@ext}"
     @rot, @vflip = 0, false
     @color, @alpha = [255, 255, 255], 255
-    @stretch, @center = [0, 0], [@width, @height]
+    @origin, @viewport = [0, 0], [@width / @scale, @height / @scale]
     @already_touching = false
   end
   
-  def attr() [@x, @y, @width, @height, @file, @rot, @alpha, *@color, *@stretch, *@center, @vflip] end
+  def attr() [@x, @y, @width, @height, @file, @rot, @alpha, *@color, *@origin, *@viewport, @vflip] end
   
   def x2() @x + @width end
   def y2() @y + @height end
@@ -21,12 +23,15 @@ end
 
 module Animation
 
-  def load_frames
-    @start = 0
-    @sprites, @per, @loop = 6, 8, true
+  def load_frames(start, sprites, per, loop)
+    @start = start
+    @sprites, @per, @loop = sprites, per, loop
   end
   
-  def animate() @file = "#{@filename}#{@start.frame_index @sprites, @per, @loop}#{@ext}" end
+  def animate()
+    index = 0.frame_index @sprites, @per, @loop
+    @file = "#{@filename}#{index + @start}#{@ext}" 
+  end
   
   def random_color(start, size) @color = 3.times.map {rand(size) + start} end
   

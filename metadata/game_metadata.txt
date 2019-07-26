@@ -1,6 +1,6 @@
-#devid=myname
-#devtitle=My Name
-#gameid=mygame
-#gametitle=My Game
-#version=0.1
-#icon=metadata/icon.png
+devid=kniknoo
+devtitle=Hieronymus-Bots 
+gameid=Dragon-Demo
+gametitle=Dragon-Demo
+version=0.1.1
+icon=metadata/icon.png
